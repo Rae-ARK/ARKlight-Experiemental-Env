@@ -25,7 +25,9 @@ to, in brief (see that document for the full statement of each):
   library.
 - **Static UI first, behavior later.** `State`/`Watch`/`Action`/any
   ARKVM are explicitly out of scope until Stage 4, and Stage 4 is a
-  decision made *after* Stages 0-3 have results, not before.
+  decision made *after* Stages 0-3 have results, not before. In
+  version terms: **v1 is Stages 0-3, non-stateful only; Stage 4's
+  ARKVM decision is a v2+ concern.**
 - **Semantic styling, not CSS.** IR styling semantics lower directly
   to native view properties; no IR-to-CSS-to-native round trip.
 - **Fail loudly, not silently.** An unsupported IR construct is

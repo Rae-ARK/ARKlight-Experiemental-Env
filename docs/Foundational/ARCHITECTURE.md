@@ -1,4 +1,4 @@
-# ARKlight Experimental Environment: Architecture v0.002
+# ARKlight Experimental Environment: Architecture v0.003
 
 This was the first documentation pass for this repo, originally
 written as a single `docs/ARCHITECTURE.md` -- the same shape
@@ -30,6 +30,19 @@ Web-shaped assumptions actually are.
 This is a test of the IR, using Android as the instrument. It is not
 a proposal to add a production Android environment to ARKlight.
 
+### v1 scope: non-stateful only
+
+**v1 of this experiment is Stages 0-3 below -- static UI structure,
+styling/layout mapping, and (if reached) interaction experiments --
+all of it still non-stateful.** Stage 4 (the ARKVM decision) is a
+**v2+ concern**: it doesn't need to be reached, decided, or even
+leaned toward for v1 to answer its own pass/fail question. Nailing
+the non-stateful UI/UX lowering -- can the IR's static, non-behavioral
+subset be reconstructed natively at all -- is the entire v1 job. This
+mirrors the "Static UI first" and "No behavioral runtime, yet"
+principles below; this section just names the version boundary
+explicitly so it isn't only implicit in the staging order.
+
 ## Relationship to the parent repo
 
 This repo is a child experiment of
@@ -52,6 +65,20 @@ Android view primitives (`TextView`, layout containers, `GridLayout`,
 ...) instead. The Web backend's HTML/CSS/JS output is not this
 environment's input, and is not parsed at any point -- only the IR
 that produced it is.
+
+This repo is also unrelated to (but worth distinguishing from)
+[`Rae-ARK/C_ARKlight`](https://github.com/Rae-ARK/C_ARKlight)
+("carklight"), a separate downstream C port of a settled ARKlight
+baseline. carklight's proposed `.arklight` file
+(`docs/ADDENDUM.md` in that repo) is a real, versioned, on-disk
+binary IR format -- a different, parallel way of getting IR into a
+non-Python consumer than this repo's current "import `arklight` as a
+Python library" approach. That binary IR output isn't built yet
+(it's carklight's own last implementation stage, not yet done), so it
+changes nothing about this repo's Setup today. It's noted here only
+because it's a plausible future ingestion path once it exists --
+this repo would still get the IR either way, just through a sealed
+file instead of a live library import.
 
 ## Core principles
 
@@ -164,9 +191,10 @@ tree.
 - **Stage 3 -- Native interaction experiments.** Explicitly a later,
   separate phase; not assumed to be needed. Only attempted once
   Stages 0-2 have recorded results.
-- **Stage 4 -- ARKVM decision.** A decision on whether a native
+- **Stage 4 -- ARKVM decision (v2+).** A decision on whether a native
   execution model (`State`/`Watch`/`Action` support) is actually
-  warranted, made *after* Stages 0-3, not before. **A candidate
+  warranted, made *after* Stages 0-3, not before, and out of scope
+  for v1 regardless of when it's reached. **A candidate
   shape for that decision -- an ARKVM core in C (calling into C++
   libraries internally) exposed across a stable C-ABI FFI, with a
   per-environment implementation hooking into it rather than each
@@ -212,3 +240,11 @@ backend terminology, the "don't treat CSS as the Android backend's
 input" argument, the staged 1-4 experimental order above) originated
 in this repo's second commit and has been folded into this document
 rather than kept as a standalone transcript.
+
+v0.003 made the pre-existing v1/v2+ split explicit (v1 = Stages 0-3,
+non-stateful only; Stage 4's ARKVM decision = v2+), verified the
+Setup instructions against `alpha` HEAD, and cross-referenced
+`carklight`'s separate `.arklight` binary IR proposal as a
+not-yet-built, future-only alternative ingestion path. No principle,
+stage boundary, or non-goal changed -- these were clarifications and
+verification, not a design revision.
