@@ -12,7 +12,8 @@ this repo explicitly rejects). Whoever picks up Stage 0 should
 confirm the real entry point against arklight's own source
 (`alpha` branch) and delete whichever guess turns out unused.
 
-Exit criterion for this file (see docs/ARCHITECTURE.md, Stage 0):
+Exit criterion for this file (see docs/Foundational/ARCHITECTURE.md,
+Stage 0):
 `load_ir()` returns a walkable IR object/tree for a given site
 source, and `dump_ir()` can render it as inspectable JSON.
 """
@@ -96,7 +97,7 @@ def dump_ir(ir: Any) -> str:
     Stage 0 only needs this to be legible, not lossless: unknown
     node types are rendered by type name and repr() rather than
     silently dropped, per the "fail loudly, not silently" principle
-    in docs/ARCHITECTURE.md.
+    in docs/Foundational/ARCHITECTURE.md.
     """
 
     def default(obj: Any) -> Any:

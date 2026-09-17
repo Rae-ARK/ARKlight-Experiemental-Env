@@ -1,11 +1,16 @@
-# ARKlight Experimental Environment: Architecture v0.001
+# ARKlight Experimental Environment: Architecture v0.002
 
-This is the first documentation pass for this repo. It follows the
-same shape ARKlight's own first `docs/ARCHITECTURE.md` used -- a
-short, lean statement of vision, principles, and pipeline, not the
-larger multi-folder documentation system the parent repo has grown
-into since. This repo earns that larger structure later, if and when
-it needs it; it doesn't start by copying it wholesale.
+This was the first documentation pass for this repo, originally
+written as a single `docs/ARCHITECTURE.md` -- the same shape
+ARKlight's own first architecture doc used, before that repo grew
+into the larger multi-folder `docs/Foundational/` /
+`docs/Proposals/` / `docs/Backends/` system it uses today (see
+[`docs/README.md`](../README.md) for how this repo now mirrors that
+same folder convention, scaled down to what this repo actually
+needs). This document has now graduated into `docs/Foundational/` as
+this repo's own permanent, settled design record -- updated in
+place, not deleted, per that folder's own
+[`README.md`](README.md).
 
 ## Vision
 
@@ -161,7 +166,17 @@ tree.
   Stages 0-2 have recorded results.
 - **Stage 4 -- ARKVM decision.** A decision on whether a native
   execution model (`State`/`Watch`/`Action` support) is actually
-  warranted, made *after* Stages 0-3, not before.
+  warranted, made *after* Stages 0-3, not before. **A candidate
+  shape for that decision -- an ARKVM core in C (calling into C++
+  libraries internally) exposed across a stable C-ABI FFI, with a
+  per-environment implementation hooking into it rather than each
+  environment reimplementing the behavioral runtime -- is sketched
+  in**
+  [`docs/Proposals/ARKVM-FFI-ENVIRONMENT-CONTRACT-PROPOSAL.md`](../Proposals/ARKVM-FFI-ENVIRONMENT-CONTRACT-PROPOSAL.md).
+  **Filed there, not here, because it is exactly the kind of
+  not-yet-decided idea `docs/Proposals/` exists for -- this section
+  stays a placeholder until Stage 4 is actually reached and a
+  decision is made one way or the other.**
 
 ## Non-goals (for this repo, for now)
 

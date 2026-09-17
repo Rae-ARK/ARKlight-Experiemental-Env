@@ -5,13 +5,18 @@ Alpha's compiler IR be genuinely lowered into a native, non-Web
 execution environment and still work? Android is the first target.
 
 Full scope, principles, and the pipeline this repo is testing:
-[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+[`docs/Foundational/ARCHITECTURE.md`](docs/Foundational/ARCHITECTURE.md).
+See [`docs/README.md`](docs/README.md) for the full documentation
+index (mirrors the parent repo's `Foundational/`/`Proposals/` folder
+convention, scaled to what this repo needs).
 
 ## Status
 
 No environment code has been written yet. This repo currently holds
-only the experiment's design/architecture doc. Check
-`docs/ARCHITECTURE.md` for the planned staged order.
+only the experiment's design/architecture doc, plus one unsettled
+proposal for a later stage. Check `docs/Foundational/ARCHITECTURE.md`
+for the planned staged order, and `docs/README.md` for the full
+documentation index.
 
 ## Setup
 
@@ -46,5 +51,13 @@ The parent repo already ships an `arklight android` subcommand on
 `arklight build` HTML/CSS/JS output in a native Android app shell via
 `WebView`. This repo is testing something categorically different: an
 environment that renders the IR natively, without HTML/WebView at
-all. See `docs/ARCHITECTURE.md`'s "Relationship to the parent repo"
-section for the full distinction.
+all. See `docs/Foundational/ARCHITECTURE.md`'s "Relationship to the
+parent repo" section for the full distinction.
+
+## What's next
+
+Stage 0 (IR wiring scaffold) is in progress -- see
+`src/arklight_native_env/`. A later, not-yet-reached stage (Stage 4,
+the ARKVM decision) already has a candidate design worth reading
+ahead of time:
+[`docs/Proposals/ARKVM-FFI-ENVIRONMENT-CONTRACT-PROPOSAL.md`](docs/Proposals/ARKVM-FFI-ENVIRONMENT-CONTRACT-PROPOSAL.md).

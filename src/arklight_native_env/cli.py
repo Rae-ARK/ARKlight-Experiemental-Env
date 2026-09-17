@@ -2,7 +2,8 @@
 
 Deliberately the only subcommand at this stage. It proves the IR is
 reachable and legible; it does not render anything, native or
-otherwise. See docs/ARCHITECTURE.md, "Implementation staging".
+otherwise. See docs/Foundational/ARCHITECTURE.md, "Implementation
+staging".
 """
 
 from __future__ import annotations
