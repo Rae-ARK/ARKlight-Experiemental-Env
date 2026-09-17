@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arklight-native-env"
+version = "0.0.0"
+description = "Stage 0 scaffold: experimental native (non-Web) execution environment for ARKlight's IR. Not a production ARKlight environment."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    # arklight itself is intentionally NOT listed here as an
+    # auto-installed dependency: per the root README, it must be
+    # installed editable, by hand, after accepting its license terms
+    # (ARKLIGHT_ACCEPT_LICENSE=1). This package assumes `arklight` is
+    # already importable in the active environment.
+]
+
+[project.scripts]
+arklight-native-env = "arklight_native_env.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

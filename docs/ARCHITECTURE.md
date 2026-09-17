@@ -127,13 +127,41 @@ Current:
   described a Backend Interface before more than the HTML backend
   existed.)
 
-Planned, in order (per the design history this repo starts from):
-1. Native static UI rendering -- IR structure/content only.
-2. Native styling/layout mapping -- IR styling semantics only.
-3. Native interaction experiments -- explicitly a later, separate
-   phase; not assumed to be needed.
-4. A decision on whether a native execution model (an "ARKVM") is
-   actually warranted, made *after* 1-3, not before.
+## Implementation staging
+
+Each stage below has a single pass/fail exit question. A stage does
+not start until the previous one has an answer recorded (see
+"What 'success' means here"). None of these stages reuse or build on
+top of `arklight`'s existing `android` subcommand or its
+WebView/Gradle packaging template -- that code packages *HTML*
+output and shares no structure with what this repo is doing. Every
+stage's code lives entirely in this repo, not in the parent repo's
+tree.
+
+- **Stage 0 -- Scaffold & IR wiring.** No rendering, no UI, no
+  Android at all yet. Establish: (a) this repo's own installable
+  package, independent of `arklight`'s source tree; (b) the ability
+  to invoke `arklight` as a library against a `.py` site source and
+  obtain its in-memory Website IR (not its HTML/CSS/JS output); (c)
+  a way to walk and dump that IR (e.g. as JSON) for human inspection.
+  Exit question: *can this repo obtain and legibly inspect the IR at
+  all, using arklight only as a library dependency?* Nothing here is
+  user-visible output -- it's the plumbing every later stage needs.
+- **Stage 1 -- Native static UI rendering.** IR structure/content
+  only (`Text`, `Stack`, `Grid`, ...) lowered to native Android view
+  primitives. Exit question: does the IR's static subset carry
+  enough information to reconstruct the same structure natively?
+- **Stage 2 -- Native styling/layout mapping.** IR styling semantics
+  lowered directly to Android view properties/layout params, per the
+  "Semantic styling, not CSS" principle above. Exit question: which
+  styling properties have no Android equivalent, and what does that
+  imply about the IR's platform-independence?
+- **Stage 3 -- Native interaction experiments.** Explicitly a later,
+  separate phase; not assumed to be needed. Only attempted once
+  Stages 0-2 have recorded results.
+- **Stage 4 -- ARKVM decision.** A decision on whether a native
+  execution model (`State`/`Watch`/`Action` support) is actually
+  warranted, made *after* Stages 0-3, not before.
 
 ## Non-goals (for this repo, for now)
 
